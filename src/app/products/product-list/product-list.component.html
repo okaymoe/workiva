@@ -1,7 +1,37 @@
-<div class="product-list">
+<div class="container">
+  <div class="header">
+    <h1>Premium Phones</h1>
+    <p>Discover our collection of high-quality smartphones with cutting-edge technology and sleek designs.</p>
+  </div>
+
+  <div class="filters">
+    <div class="search-container">
+      <input 
+        type="text" 
+        [formControl]="searchControl" 
+        placeholder="Search phones..." 
+        class="search-input"
+      />
+    </div>
+    <div class="sort-container">
+      <select [formControl]="sortControl" class="sort-select">
+        <option value="featured">Featured</option>
+        <option value="price-low">Price: Low to High</option>
+        <option value="price-high">Price: High to Low</option>
+      </select>
+    </div>
+  </div>
+
+  <div *ngIf="filteredProducts.length === 0" class="no-results">
+    <p>No products found matching your search.</p>
+  </div>
+
+  <div class="product-grid">
     <app-product-card
-      *ngFor="let product of products"
+      *ngFor="let product of filteredProducts"
       [product]="product"
-      (viewDetails)="handleViewDetails($event)">
+      (viewDetails)="handleViewDetails(product.id)">
     </app-product-card>
   </div>
+</div>
+

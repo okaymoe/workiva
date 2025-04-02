@@ -1,19 +1,22 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { Product } from '../product.model';
+import { Component, Input, Output, EventEmitter } from "@angular/core"
+import type { Product } from "../product.model"
+import { Router } from "@angular/router"
+import { CommonModule } from "@angular/common";
 
 @Component({
-  selector: 'app-product-card',
-  standalone: true,
+  selector: "app-product-card",
+  templateUrl: "./product-card.component.html",
+  styleUrls: ["./product-card.component.css"],
   imports: [CommonModule],
-  templateUrl: './product-card.component.html',
-  styleUrls: ['./product-card.component.css']
 })
 export class ProductCardComponent {
-  @Input() product!: Product;
-  @Output() viewDetails = new EventEmitter<number>();
+  @Input() product!: Product
+  @Output() viewDetails = new EventEmitter<string>()
+
+  constructor(private router: Router) {}
 
   onViewDetails(): void {
-    this.viewDetails.emit(this.product.id);
+    this.router.navigate(["/products", this.product.id])
   }
 }
+

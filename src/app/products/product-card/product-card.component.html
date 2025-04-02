@@ -1,9 +1,17 @@
-<div class="product-card">
-  <img [src]="product.image" alt="{{ product.name }}" />
-  <div class="info">
+<div class="product-card" (click)="onViewDetails()">
+  <div class="image-container">
+    <img [src]="product.image" [alt]="product.name">
+    <span *ngIf="product.isNew" class="badge">New</span>
+  </div>
+  <div class="content">
     <h3>{{ product.name }}</h3>
-    <p class="price">$ {{ product.price }}</p>
-    <p>{{ product.description }}</p>
-    <button (click)="onViewDetails()">View Details</button>
+    <p class="price">${{ product.price }}</p>
+    <p class="description">{{ product.description }}</p>
+  </div>
+  <div class="footer">
+    <div class="view-details-button">
+      View Details
+    </div>
   </div>
 </div>
+
